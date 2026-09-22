@@ -3,6 +3,8 @@
 pages:
   stage: deploy
   image: alpine:3.20
+  tags:
+    - trustdeploy
   script:
     - echo "Publishing static files from public/"
     - ls -la public
