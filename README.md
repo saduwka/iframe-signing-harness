@@ -19,9 +19,8 @@
 
 | Env | Base |
 |---|---|
-| demo | `https://demo.tct.kz` |
+| dev | `https://dev.tct.kz` |
 | prod KZ | `https://trustme.kz` |
-| OneSign | `https://signcontract.kz` |
 
 Важно: использовать именно `/uploader/`, не `/upload/` — партнёрский `postMessage` шлётся только на route `Uploads`.
 
