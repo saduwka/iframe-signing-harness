@@ -1,0 +1,13 @@
+# GitLab Pages: static harness for partner iframe signing (/contract/uploader/:shortUrl)
+
+pages:
+  stage: deploy
+  image: alpine:3.20
+  script:
+    - echo "Publishing static files from public/"
+    - ls -la public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

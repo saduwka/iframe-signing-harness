@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrustMe iframe signing harness</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="toolbar">
+    <div class="toolbar__brand">iframe signing harness</div>
+
+    <label class="field">
+      <span>Base URL</span>
+      <select id="basePreset">
+        <option value="https://demo.tct.kz" selected>demo.tct.kz</option>
+        <option value="https://trustme.kz">trustme.kz</option>
+        <option value="https://signcontract.kz">signcontract.kz</option>
+        <option value="https://trustme.uz">trustme.uz</option>
+        <option value="custom">custom…</option>
+      </select>
+    </label>
+
+    <label class="field field--grow" id="customBaseWrap" hidden>
+      <span>Custom base</span>
+      <input id="customBase" type="url" placeholder="https://example.com" />
+    </label>
+
+    <label class="field field--grow">
+      <span>Short URL</span>
+      <input id="shortUrl" type="text" placeholder="party-or-doc-short-url" autocomplete="off" spellcheck="false" />
+    </label>
+
+    <div class="toolbar__actions">
+      <button id="loadBtn" type="button">Load</button>
+      <button id="reloadBtn" type="button" class="btn--ghost">Reload</button>
+      <button id="clearLogBtn" type="button" class="btn--ghost">Clear log</button>
+    </div>
+  </header>
+
+  <div class="status-bar">
+    <div>
+      <span class="muted">iframe src:</span>
+      <code id="iframeSrc">—</code>
+    </div>
+    <div>
+      <span class="muted">last event:</span>
+      <strong id="lastEvent">none</strong>
+    </div>
+  </div>
+
+  <main class="layout">
+    <section class="frame-pane">
+      <iframe
+        id="signingFrame"
+        title="TrustMe signing"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+      ></iframe>
+    </section>
+
+    <aside class="log-pane">
+      <h2>postMessage log</h2>
+      <p class="muted tip">
+        Accepts only <code>source: trustcontract</code> from the selected base origin.
+        Parent must use route <code>/contract/uploader/:shortUrl</code> (not <code>/upload/</code>).
+      </p>
+      <pre id="log"></pre>
+    </aside>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
