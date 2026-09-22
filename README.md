@@ -2,6 +2,13 @@
 
 Статический стенд для встраивания и тестирования **партнёрской** iframe-страницы подписания TrustMe / TrustContract.
 
+## Live
+
+- **GitHub Pages:** https://saduwka.github.io/iframe-signing-harness/
+- **Репозиторий:** https://github.com/saduwka/iframe-signing-harness
+
+Локально: `npx --yes serve public` (или `python3 -m http.server 8080` в `public/`).
+
 ## URL подписания
 
 ```
@@ -20,7 +27,7 @@
 
 ## Как пользоваться
 
-1. Открой Pages URL (после деплоя) или локально: `npx serve public`
+1. Открой Pages URL (или локальный сервер)
 2. Выбери Base URL и вставь `shortUrl` документа/party (из SMS / кабинета / Public API)
 3. Нажми **Load**
 4. Смотри лог справа: события `ready` → `status` → `signed` / `error` / `revoked`
@@ -54,19 +61,12 @@ Iframe → parent:
 - `event.origin` совпадает с выбранным Base URL
 - `data.source === 'trustcontract'`
 
-## GitLab
+## Деплой
 
-- Проект: https://gitlab.trustme.kz/trustme/frontend/iframe-signing-harness
-- Локально: `cd public && npx --yes serve .` (или `python3 -m http.server 8080` в `public/`)
+GitHub Actions [`.github/workflows/pages.yml`](.github/workflows/pages.yml) публикует папку `public/` на GitHub Pages при push в `main`.
 
-### GitLab Pages
-
-Job `pages` в [`.gitlab-ci.yml`](.gitlab-ci.yml) (runner tag `trustdeploy`) публикует `public/` с `main`.
-
-После зелёного pipeline URL смотри в **Deploy → Pages** / **Settings → Pages**.
-
-Если раздел Pages пустой или URL не открывается — на инстансе `gitlab.trustme.kz` может быть не настроен Pages domain (нужна infra). До этого стенд можно гонять локально.
+Зеркало на корпоративном GitLab (без рабочего Pages domain): https://gitlab.trustme.kz/trustme/frontend/iframe-signing-harness
 
 ## frame-ancestors
 
-Если iframe пустой / blocked браузером — родительский origin (Pages или `http://localhost:…`) должен быть разрешён в nginx CSP `frame-ancestors` на стороне TrustMe. Это не чинится в этом репозитории.
+Если iframe пустой / blocked браузером — родительский origin (`https://saduwka.github.io` или `http://localhost:…`) должен быть разрешён в nginx CSP `frame-ancestors` на стороне TrustMe. Это не чинится в этом репозитории.
