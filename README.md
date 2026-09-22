@@ -54,13 +54,18 @@ Iframe → parent:
 - `event.origin` совпадает с выбранным Base URL
 - `data.source === 'trustcontract'`
 
-## GitLab Pages
+## GitLab
 
-Репозиторий: `trustme/frontend/iframe-signing-harness` на `gitlab.trustme.kz`.
+- Проект: https://gitlab.trustme.kz/trustme/frontend/iframe-signing-harness
+- Локально: `cd public && npx --yes serve .` (или `python3 -m http.server 8080` в `public/`)
 
-Job `pages` в [`.gitlab-ci.yml`](.gitlab-ci.yml) публикует папку `public/` с default branch.
+### GitLab Pages
 
-После первого успешного pipeline URL смотри в **Settings → Pages**.
+Job `pages` в [`.gitlab-ci.yml`](.gitlab-ci.yml) (runner tag `trustdeploy`) публикует `public/` с `main`.
+
+После зелёного pipeline URL смотри в **Deploy → Pages** / **Settings → Pages**.
+
+Если раздел Pages пустой или URL не открывается — на инстансе `gitlab.trustme.kz` может быть не настроен Pages domain (нужна infra). До этого стенд можно гонять локально.
 
 ## frame-ancestors
 
