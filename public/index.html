@@ -51,7 +51,7 @@
       <iframe
         id="signingFrame"
         title="TrustMe signing"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads"
+        allow="loopback-network; local-network-access"
       ></iframe>
     </section>
 
@@ -60,6 +60,7 @@
       <p class="muted tip">
         Accepts only <code>source: trustcontract</code> from the selected base origin.
         Parent must use route <code>/contract/uploader/:shortUrl</code> (not <code>/upload/</code>).
+        For EDS / NCALayer keep <code>allow="loopback-network"</code> on the iframe.
       </p>
       <pre id="log"></pre>
     </aside>

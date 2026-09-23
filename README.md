@@ -65,6 +65,22 @@ GitHub Actions [`.github/workflows/pages.yml`](.github/workflows/pages.yml) пу
 
 Зеркало на корпоративном GitLab (без рабочего Pages domain): https://gitlab.trustme.kz/trustme/frontend/iframe-signing-harness
 
+## ЭЦП / NCALayer в iframe
+
+Подписание через ЭЦП открывает WebSocket на `wss://127.0.0.1:13579` (локальный NCALayer).
+В **cross-origin** iframe Chrome блокирует loopback, пока родитель не делегирует permission:
+
+```html
+<iframe
+  src="https://trustme.kz/contract/uploader/{shortUrl}"
+  allow="loopback-network"
+  style="width:100%;height:90vh;border:0"
+></iframe>
+```
+
+Без `allow="loopback-network"` в консоли будет `WebSocket connection to 'wss://127.0.0.1:13579/' failed`, а в UI — «Не удалось открыть NClayer».
+Не ставьте лишний `sandbox` на iframe партнёрского embed — он мешает реальному сценарию.
+
 ## frame-ancestors
 
 Если iframe пустой / blocked браузером — родительский origin (`https://saduwka.github.io` или `http://localhost:…`) должен быть разрешён в nginx CSP `frame-ancestors` на стороне TrustMe. Это не чинится в этом репозитории.
