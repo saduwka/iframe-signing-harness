@@ -19,7 +19,6 @@
 
 | Env | Base |
 |---|---|
-| dev | `https://dev.tct.kz` |
 | prod KZ | `https://trustme.kz` |
 
 Важно: использовать именно `/uploader/`, не `/upload/` — партнёрский `postMessage` шлётся только на route `Uploads`.
