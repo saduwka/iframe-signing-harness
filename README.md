@@ -28,7 +28,7 @@
 1. Открой Pages URL (или локальный сервер)
 2. Выбери Base URL и вставь `shortUrl` документа/party (из SMS / кабинета / Public API)
 3. Нажми **Load**
-4. Смотри лог справа: события `ready` → `status` → `signed` / `error` / `revoked`
+4. Смотри **Debug log** справа: `ready` → `status` → `signed` / `error` / `revoked`, плюс parent console/network и iframe `debug` (NCALayer WS)
 
 Поля Base/Short сохраняются в `localStorage`.
 
@@ -40,7 +40,7 @@ Iframe → parent:
 {
   source: 'trustcontract',
   version: 1,
-  type: 'ready' | 'status' | 'signed' | 'error' | 'revoked',
+  type: 'ready' | 'status' | 'signed' | 'error' | 'revoked' | 'debug',
   payload: {
     shortUrl,
     contractId,
@@ -48,6 +48,8 @@ Iframe → parent:
     signStatus,
     partyId,
     errorCode, // optional
+    // debug:
+    // kind: 'console' | 'network',
     // ...
   },
   timestamp: 1710000000000
@@ -58,6 +60,13 @@ Iframe → parent:
 
 - `event.origin` совпадает с выбранным Base URL
 - `data.source === 'trustcontract'`
+
+### Debug log (console / network)
+
+Родитель **не видит** DevTools iframe cross-origin. Поэтому:
+
+1. Харнес пишет **свой** `console.*` и parent `PerformanceObserver` (resource).
+2. TrustMe в embed шлёт `type: 'debug'` (console.warn/error + NCALayer WebSocket open/close/error), чтобы в логе был fail `wss://127.0.0.1:13579`.
 
 ## Деплой
 

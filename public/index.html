@@ -56,11 +56,12 @@
     </section>
 
     <aside class="log-pane">
-      <h2>postMessage log</h2>
+      <h2>Debug log</h2>
       <p class="muted tip">
-        Accepts only <code>source: trustcontract</code> from the selected base origin.
-        Parent must use route <code>/contract/uploader/:shortUrl</code> (not <code>/upload/</code>).
-        For EDS / NCALayer keep <code>allow="loopback-network"</code> on the iframe.
+        Channels: <code>postMessage</code>, parent <code>console</code>/<code>network</code>,
+        and iframe <code>type: debug</code> (NCALayer WS / console via TrustMe embed bridge).
+        Protocol messages need <code>source: trustcontract</code> from the selected base origin.
+        Route: <code>/contract/uploader/:shortUrl</code>. EDS needs <code>allow="loopback-network"</code>.
       </p>
       <pre id="log"></pre>
     </aside>
