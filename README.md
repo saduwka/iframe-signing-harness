@@ -23,6 +23,17 @@
 
 Важно: использовать именно `/uploader/`, не `/upload/` — партнёрский `postMessage` шлётся только на route `Uploads`.
 
+### SMS vs partner iframe (ENG-5482)
+
+Один и тот же legacy URL ведёт себя по-разному:
+
+| Как открыли | Куда попадёте |
+|---|---|
+| **iframe** (этот harness / партнёры) | остаётесь на **legacy** Uploads + `trustcontract` postMessage |
+| **top-level** (клик из SMS / новая вкладка) | redirect → `{base}/app/documents/{shortUrl}` (documents-miniapp) |
+
+Шаблоны SMS / backend URL не меняются. Smoke SMS: открой тот же `/contract/uploader/{shortUrl}` в новой вкладке (не в iframe) и проверь уход на `/app/documents/`.
+
 ## Как пользоваться
 
 1. Открой Pages URL (или локальный сервер)

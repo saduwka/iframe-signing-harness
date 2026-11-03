@@ -61,7 +61,8 @@
         Channels: <code>postMessage</code>, parent <code>console</code>/<code>network</code>,
         and iframe <code>type: debug</code> (NCALayer WS / console via TrustMe embed bridge).
         Protocol messages need <code>source: trustcontract</code> from the selected base origin.
-        Route: <code>/contract/uploader/:shortUrl</code>. EDS needs <code>allow="loopback-network"</code>.
+        Route: <code>/contract/uploader/:shortUrl</code> (iframe → legacy; top-level/SMS → <code>/app/documents/</code>).
+        EDS needs <code>allow="loopback-network"</code>.
       </p>
       <pre id="log"></pre>
     </aside>
